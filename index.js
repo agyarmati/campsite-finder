@@ -90,5 +90,5 @@ const findAvailableCampsites = async () => {
 };
 
 // every 15 min
-console.log("Campsite Finder started, checking every 15 minutes.");
-setInterval(findAvailableCampsites, 15 * 60 * 1000);
+console.log("Campsite Finder started.");
+findAvailableCampsites();
