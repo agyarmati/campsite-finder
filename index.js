@@ -56,6 +56,7 @@ const findAvailableSitesByCampground = async (campgroundId, dateString) => {
 
 const findAvailableCampsites = async () => {
   console.log("Checking campsites...");
+  console.log("---------------");
   const searchMap = {
     232465: "2023-06-23T00:00:00Z",
     247592: "2023-06-26T00:00:00Z",
@@ -89,5 +90,6 @@ const findAvailableCampsites = async () => {
 };
 
 // every 15 min
-// setInterval(findAvailableCampsites, 15 * 60 * 1000);
-findAvailableCampsites();
+console.log("Campsite Finder started.");
+setInterval(findAvailableCampsites, 15 * 60 * 1000);
+// findAvailableCampsites();
