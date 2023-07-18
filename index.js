@@ -58,34 +58,37 @@ const findAvailableCampsites = async () => {
   console.log("Checking campsites...");
   console.log("---------------");
   const searchMap = {
-    247592: "2023-06-26T00:00:00Z",
+    232306: ["2023-07-28T00:00:00Z", "2023-07-29T00:00:00Z"],
   };
-  const campgroundIds = ["247592"];
+  const campgroundIds = ["232306"];
   for (const campgroundId of campgroundIds) {
-    const dateString = searchMap[campgroundId];
-    const { facility_name: campgroundName } = await getCampgroundData(
-      campgroundId
-    );
-    const campgroundNameFormatted = campgroundName
-      .toLowerCase()
-      .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
-    const availableCampsites = await findAvailableSitesByCampground(
-      campgroundId,
-      dateString
-    );
-    console.log(`${campgroundNameFormatted}: `);
-    if (availableCampsites.length) {
-      console.log(`Available campsites: ${availableCampsites.join(", ")}`);
-      sendTextMessage(
-        `Campsite(s) available at ${campgroundNameFormatted}: ${availableCampsites.join(
-          ", "
-        )}`
+    const dateStrings = searchMap[campgroundId];
+    for (const dateString of dateStrings) {
+      const { facility_name: campgroundName } = await getCampgroundData(
+        campgroundId
       );
-    } else {
-      console.log(`No available campsites for ${dateString}`);
+      const campgroundNameFormatted = campgroundName
+        .toLowerCase()
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+      const availableCampsites = await findAvailableSitesByCampground(
+        campgroundId,
+        dateString
+      );
+      console.log(`${campgroundNameFormatted}: `);
+      if (availableCampsites.length) {
+        console.log(`Available campsites: ${availableCampsites.join(", ")}`);
+        sendTextMessage(
+          `Campsite(s) available at ${campgroundNameFormatted}: ${availableCampsites.join(
+            ", "
+          )}`
+        );
+      } else {
+        console.log(`No available campsites for ${dateString}`);
+      }
     }
     console.log("---------------");
   }
 };
 
 findAvailableCampsites();
+// setInterval(findAvailableCampsites, 5 * 60 * 1000);
