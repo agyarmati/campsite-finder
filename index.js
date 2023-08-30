@@ -58,9 +58,18 @@ const findAvailableCampsites = async () => {
   console.log("Checking campsites...");
   console.log("---------------");
   const searchMap = {
-    232306: ["2023-07-28T00:00:00Z", "2023-07-29T00:00:00Z"],
+    232306: [
+      "2023-09-01T00:00:00Z",
+      "2023-09-02T00:00:00Z",
+      "2023-09-03T00:00:00Z",
+    ],
+    232462: [
+      "2023-09-01T00:00:00Z",
+      "2023-09-02T00:00:00Z",
+      "2023-09-03T00:00:00Z",
+    ],
   };
-  const campgroundIds = ["232306"];
+  const campgroundIds = ["232306", "232462"];
   for (const campgroundId of campgroundIds) {
     const dateStrings = searchMap[campgroundId];
     for (const dateString of dateStrings) {
